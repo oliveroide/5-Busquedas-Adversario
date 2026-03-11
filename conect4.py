@@ -108,6 +108,9 @@ def ordena_centro(jugadas, jugador):
     """
     return sorted(jugadas, key=lambda x: abs(x - 3))
 
+#def ordenar_ractivo(jugadas, jugador):
+    #primero juegada ganadoras, luego jugadas que evitan al jugador -1 ganar y luego usar ordena_centro
+
 def evalua_3con(s):
     """
     Evalua el estado s para el jugador 1
