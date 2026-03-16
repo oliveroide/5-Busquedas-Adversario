@@ -32,10 +32,157 @@ import juegos_simplificado as js
 import minimax
 class reversi(js.JuegoZT2):
 	def inicializa(self):
-			return tuple([0 for _ in range(8 * 8)])
+			return (
+        0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0, -1,  1,  0,  0,  0,
+        0,  0,  0,  1, -1,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0,
+        0,  0,  0,  0,  0,  0,  0,  0
+    )
 			
 	def jugadas_legales(self, s, j):
-			return 0
+		oponente = -j
+		movimientos_validos = [] 
+  
+		for pieza in range(64):
+			if s[pieza] == j:
+				
+				# Arriba (-8)
+				i = pieza
+				rival = 0
+				while True:
+					i -= 8
+					if i < 0: break 
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Abajo (+8) 
+				i = pieza
+				rival = 0
+				while True:
+					i += 8
+					if i > 63: break 
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Izquierda (-1) 
+				i = pieza
+				rival = 0
+				while True:
+					if i % 8 == 0: break 
+					i -= 1
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Derecha (+1)
+				i = pieza
+				rival = 0
+				while True:
+					if i % 8 == 7: break 
+					i += 1
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Diagonal arriba izquierda (-9)
+				i = pieza
+				rival = 0
+				while True:
+					if i % 8 == 0: break 
+					i -= 9
+					if i < 0: break 
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Diagonal arriba derecha (-7)
+				i = pieza
+				rival = 0
+				while True:
+					if i % 8 == 7: break 
+					i -= 7
+					if i < 0: break 
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Diagonal abajo izquieda (+7) 
+				i = pieza
+				rival = 0
+				while True:
+					if i % 8 == 0: break 
+					i += 7
+					if i > 63: break 
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+				# Diagonal abajo derecha (+9)
+				i = pieza
+				rival = 0
+				while True:
+					if i % 8 == 7: break 
+					i += 9
+					if i > 63: break 
+					
+					if s[i] == oponente: 
+						rival += 1
+					elif s[i] == 0:
+						if rival > 0 and i not in movimientos_validos: 
+							movimientos_validos.append(i)
+						break
+					elif s[i] == j:
+						break
+
+		return movimientos_validos
 		
 	def sucesor(self, s, a, j):
 		s = list(s[:])
