@@ -326,7 +326,7 @@ class reversi(js.JuegoZT2):
 		
 		
 	def ganancia(self, s):
-		return 0
+		return sum(s)
 		
 	def terminal(self, s):
 		if 0 not in s:
