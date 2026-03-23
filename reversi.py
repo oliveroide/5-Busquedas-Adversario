@@ -186,6 +186,141 @@ class reversi(js.JuegoZT2):
 		
 	def sucesor(self, s, a, j):
 		s = list(s[:])
+		rival = -j
+		s[a] = j
+
+		# Arriba (-8)
+		i = a
+		volteo = []
+		while True:
+			i -= 8
+			if i < 0: break 
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Abajo (+8)
+		i = a
+		volteo = []
+		while True:
+			i += 8
+			if i > 63: break 
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Izquierda (-1)
+		i = a
+		volteo = []
+		while True:
+			if i % 8 == 0: break 
+			i -= 1
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Derecha (+1)
+		i = a
+		volteo = []
+		while True:
+			if i % 8 == 7: break 
+			i += 1
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Diagonal arriba izquierda (-9)
+		i = a
+		volteo = []
+		while True:
+			if i % 8 == 0: break 
+			i -= 9
+			if i < 0: break 
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Diagonal arriba derecha (-7)
+		i = a
+		volteo = []
+		while True:
+			if i % 8 == 7: break 
+			i -= 7
+			if i < 0: break 
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Diagonal abajo izquierda (+7)
+		i = a
+		volteo = []
+		while True:
+			if i % 8 == 0: break 
+			i += 7
+			if i > 63: break 
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
+		# Diagonal abajo derecha (+9)
+		i = a
+		volteo = []
+		while True:
+			if i % 8 == 7: break 
+			i += 9
+			if i > 63: break 
+			
+			if s[i] == rival:
+				volteo.append(i)
+			elif s[i] == j:
+				for p in volteo:
+					s[p] = j
+				break
+			elif s[i] == 0:
+				break
+
 		return tuple(s)
 
 		
@@ -195,5 +330,7 @@ class reversi(js.JuegoZT2):
 		
 	def terminal(self, s):
 		if 0 not in s:
+			return True
+		elif len(self.jugadas_legales(s, 1)) == 0 and len(self.jugadas_legales(s, -1)) == 0:
 			return True
 		return self.ganancia(s) != 0
